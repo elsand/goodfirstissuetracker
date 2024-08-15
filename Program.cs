@@ -7,6 +7,7 @@ var host = new HostBuilder()
     .ConfigureFunctionsWorkerDefaults()
     .ConfigureAppConfiguration(configuration =>
     {
+        configuration.AddEnvironmentVariables();
         configuration.AddUserSecrets<Program>(optional: true, reloadOnChange: false);
     })
     .ConfigureServices(services =>
