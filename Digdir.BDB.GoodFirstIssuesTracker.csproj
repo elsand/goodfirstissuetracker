@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <AzureFunctionsVersion>V4</AzureFunctionsVersion>
+        <OutputType>Exe</OutputType>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+      <UserSecretsId>da70de68-2e6f-446c-a3a4-b89000753e36</UserSecretsId>
+  </PropertyGroup>
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+        <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.22.0" />
+        <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Timer" Version="4.3.1" />
+        <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.17.4" />
+        <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.22.0" />
+        <PackageReference Include="Microsoft.Azure.Functions.Worker.ApplicationInsights" Version="1.2.0" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Update="host.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="local.settings.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+        </None>
+    </ItemGroup>
+    <ItemGroup>
+        <Using Include="System.Threading.ExecutionContext" Alias="ExecutionContext" />
+    </ItemGroup>
+</Project>
