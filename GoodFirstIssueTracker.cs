@@ -24,7 +24,7 @@ public class GoodFirstIssueTracker
         _configuration = configuration;
 
         if (GithubClient.DefaultRequestHeaders.Authorization is not null) return;
-        GithubClient.DefaultRequestHeaders.Add("Authorization", $"token {_configuration.GetValue<string>("GitHub:Token")}");
+        GithubClient.DefaultRequestHeaders.Add("Authorization", $"token {_configuration.GetValue<string>("GitHubToken")}");
         GithubClient.DefaultRequestHeaders.Add("User-Agent", "AzureFunction-GoodFirstIssues");
         GithubClient.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
     }
@@ -32,13 +32,13 @@ public class GoodFirstIssueTracker
     [Function("GoodFirstIssueTracker")]
     public async Task RunAsync([TimerTrigger("0 */30 * * * *", RunOnStartup = true)] TimerInfo myTimer)
     {
-        var repos = _configuration.GetValue<string>("GitHub:Repos")?.Split(',');
+        var repos = _configuration.GetValue<string>("GitHubRepos")?.Split(',');
         if (repos is null)
         {
             _logger.LogError("No repositories found in configuration");
             return;
         }
-        var orgAndProjectNumber = _configuration.GetValue<string>("GitHub:Project")?.Split('/');
+        var orgAndProjectNumber = _configuration.GetValue<string>("GitHubProject")?.Split('/');
         if (orgAndProjectNumber is null)
         {
             _logger.LogError("No organization and project number found in configuration");
